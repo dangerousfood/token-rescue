@@ -2,7 +2,7 @@
 pragma solidity ^0.7.0;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
-import "./TokenRescue.sol";
+import "../TokenRescue.sol";
 
 contract Example is ERC20, TokenRescue {
 
