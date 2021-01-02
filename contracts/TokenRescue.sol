@@ -59,12 +59,12 @@ contract TokenRescue is Context {
       _;
   }
 
-  function renounceOwnership() public virtual onlyRescueOwner {
+  function renounceRescueOwnership() public virtual onlyRescueOwner {
       emit TokenRescueOwnershipTransferred(_rescueOwner, address(0));
       _rescueOwner = address(0);
   }
 
-  function transferOwnership(address newOwner) public virtual onlyRescueOwner {
+  function transferRescueOwnership(address newOwner) public virtual onlyRescueOwner {
       require(newOwner != address(0), "TokenRescue: new owner is the zero address");
       emit TokenRescueOwnershipTransferred(_rescueOwner, newOwner);
       _rescueOwner = newOwner;
