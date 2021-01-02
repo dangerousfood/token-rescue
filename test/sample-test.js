@@ -6,6 +6,7 @@ const {
   expectEvent,  // Assertions for emitted events
   expectRevert, // Assertions for transactions that should fail
 } = require('@openzeppelin/test-helpers');
+const { BN } = require("@openzeppelin/test-helpers/src/setup");
 
 describe("TokenRescue", function() {
   const [ownerAddr, sender, receiver] = accounts;
@@ -54,14 +55,9 @@ describe("TokenRescue", function() {
 
   it("Successfully transfer using rTransfer method", async function() {
     await this.testToken.mint(this.example.address, value)
-    const receipt = await this.example.connect(this.owner).rTransfer(this.testToken.address, receiver, value)
+    await this.example.connect(this.owner).rTransfer(this.testToken.address, receiver, value)
     
-    // Event assertions can verify that the arguments are the expected ones
-    expectEvent(receipt, 'Transfer', {
-      from: this.example.address,
-      to: receiver,
-      value: value,
-    });
+    expect((await this.testToken.balanceOf(receiver)).toString()).to.equal(value);
   });
 });
 
